@@ -3,7 +3,7 @@ const db = require('../db/index.js');
 mongoose.Promise = global.Promise;
 
 const overviewSchema = new mongoose.Schema({
-  id: Number,
+  id: { type: Number, unique: true },
   title: String,
   review: Number,
   reviewStars: [Number],
