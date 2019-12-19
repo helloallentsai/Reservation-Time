@@ -36,7 +36,7 @@ const generateData = (filepath, start) => {
     }
 
     const description = faker.lorem.sentences((Math.random() * 4) + 2);
-    const entry = `${id},${title},${review},[${reviewStars}],${numOfReviews},${pricePerPersonLow},${pricePerPersonHigh},${category},[${tags}],${description}\n`;
+    const entry = `${id};${title};${review};[${reviewStars}];${numOfReviews};${pricePerPersonLow};${pricePerPersonHigh};${category};[${tags}];${description}\n`;
 
     ws.write(entry);
   }
@@ -55,5 +55,7 @@ generateData('./csv/overview7.csv', 6000001);
 generateData('./csv/overview8.csv', 7000001);
 generateData('./csv/overview9.csv', 8000001);
 generateData('./csv/overview10.csv', 9000001);
-console.log(`Took about ${Math.ceil((new Date() - now) / 60000)} minutes to generate`);
+console.log(`About ${Number((new Date() - now) / 60000).toFixed(2)} minutes to generate`);
+
+
 
