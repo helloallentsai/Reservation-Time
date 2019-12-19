@@ -24,3 +24,5 @@ coverage
 build/
 dist/
 
+# generated CSV files
+*.csv

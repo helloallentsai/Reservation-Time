@@ -2,7 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const db = require('./db/overviewDAO.js');
+//mongo
+// const db = require('./db/overviewDAO.js');
+
+//cassandra
+const db = require('./db/cassandra/index.js');
+
+//postgres
+// const db = require('./db/postgres/index.js');
 
 const app = express();
 
