@@ -24,3 +24,11 @@ client.connect((err) => {
 });
 
 module.exports = client;
+
+
+//   const query = `INSERT INTO overviews (id, title, review, reviewStars, numOfReviews, pricePerPersonLow, pricePerPersonHigh, category, topTags, "description") VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?)`;
+
+//   client.execute(query, entry, { prepare: true })
+//     .then(() => console.log(`${i} of entries inserted`))
+//     .catch(err => errors.push(err))
+//     .then(() => console.log(errors[0]));
