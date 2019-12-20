@@ -30,10 +30,7 @@ const generateData = (filepath, start) => {
     const pricePerPersonHigh = 50 + Math.floor(Math.random() * 50);
     const category = categories[Math.floor(Math.random() * categories.length)];
 
-    const tags = [];
-    for (let j = 0; j < 3; j++) {
-      tags.push(faker.commerce.productAdjective());
-    }
+    const tags = `${faker.commerce.productAdjective()}, ${faker.commerce.productAdjective()}, ${faker.commerce.productAdjective()}`;
 
     const description = faker.lorem.sentences((Math.random() * 4) + 2);
     const entry = `${id};${title};${review};[${reviewStars}];${numOfReviews};${pricePerPersonLow};${pricePerPersonHigh};${category};[${tags}];${description}\n`;

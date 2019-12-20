@@ -12,5 +12,5 @@ CREATE TABLE overviews (
 );
 
 /*
-$ COPY overviews (id, title, review, reviewStars, numOfReviews, pricePerPersonLow, pricePerPersonHigh, category, topTags, "description") FROM '../service/server/db/data/csv/overview1.csv' WITH DELIMITER=';' AND HEADER=TRUE;
+COPY overviews (id, title, review, reviewStars, numOfReviews, pricePerPersonLow, pricePerPersonHigh, category, topTags, "description") FROM '../service/server/db/data/csv/overview1.csv' WITH DELIMITER=';' AND HEADER=TRUE;
 */
