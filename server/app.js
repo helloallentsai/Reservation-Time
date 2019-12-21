@@ -6,7 +6,7 @@ const cors = require('cors');
 // const db = require('./db/overviewDAO.js');
 
 //cassandra
-const db = require('./db/cassandra/index.js');
+const client = require('./db/cassandra/index.js');
 
 //postgres
 // const db = require('./db/postgres/index.js');
@@ -27,8 +27,9 @@ app.use((req, res, next) => {
 app.get('/api/restaurant/:restaurantId', (req, res) => {
   const id = req.params.restaurantId;
 
-  db.read(id)
-    .then(entry => res.status(200).send(entry))
+  const query = `SELECT * FROM overviews WHERE id=${id}`;
+  client.execute(query)
+    .then(result => res.status(200).send(result.rows[0]))
     .catch(err => {
       console.log(err);
       res.status(404).end();
@@ -37,8 +38,11 @@ app.get('/api/restaurant/:restaurantId', (req, res) => {
 
 app.post('/api/restaurant/', (req, res) => {
   const data = req.body;
-  db.create(data)
-    .then(() => res.status(201).send('Restaurant created'))
+
+  const query = `INSERT INTO overviews(id,title,review,reviewStars,numOfReviews,pricePerPersonLow,pricePerPersonHigh,category,topTags,"description") VALUES (?,?,?,?,?,?,?,?,?,?)`;
+  console.log(data);
+  client.execute(query, data, { prepare: true })
+    .then(result => res.status(201).send('restaurant inserted'))
     .catch(err => {
       console.log(err);
       res.status(404).end();
@@ -49,19 +53,23 @@ app.put('/api/restaurant/:restaurantId', (req, res) => {
   const data = req.body;
   const id = req.params.restaurantId;
 
-  db.update(id, data)
-    .then(entry => res.status(200).send('Entry updated'))
+  const query = `UPDATE overviews SET title=?,review=?,reviewStars=?,numOfReviews=?,pricePerPersonLow=?,pricePerPersonHigh=?,category=?,topTags=?,"description"=? WHERE id=${id}`;
+
+  client.execute(query, [data.title, data.review, data.reviewStars, data.numOfReviews, data.pricePerPersonLow, data.pricePerPersonHigh, data.category, data.topTags, data.description], { prepare: true })
+    .then(result => res.status(201).send('restaurant updated'))
     .catch(err => {
       console.log(err);
       res.status(404).end();
     });
+
 });
 
 app.delete('/api/restaurant/:restaurantId', (req, res) => {
   const id = req.params.restaurantId;
 
-  db.del(id)
-    .then(entry => res.status(200).send(entry))
+  const query = `DELETE FROM overviews WHERE id=${id}`;
+  client.execute(query)
+    .then(result => res.status(200).send('restaurant deleted'))
     .catch(err => {
       console.log(err);
       res.status(404).end();
