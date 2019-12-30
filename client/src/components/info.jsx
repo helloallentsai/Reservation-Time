@@ -41,7 +41,7 @@ const Info = (props) => (
           </g>
         </svg>
       </div>
-      <div style={innerDivStyle}>{props.info.numOfReviews + ' Reviews'}</div>
+      <div style={innerDivStyle}>{props.info.numofreviews + ' Reviews'}</div>
     </div>
 
     <div style={divStyle}>
@@ -63,7 +63,7 @@ const Info = (props) => (
           </g>
         </svg>
       </div>
-      <div style={innerDivStyle}>{'$' + props.info.pricePerPersonLow + ' to $' + props.info.pricePerPersonHigh}</div>
+      <div style={innerDivStyle}>{'$' + props.info.priceperpersonlow + ' to $' + props.info.priceperpersonhigh}</div>
     </div>
 
     <div style={divStyle}>
