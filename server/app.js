@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -40,12 +41,12 @@ app.post('/api/restaurant/', (req, res) => {
   const data = req.body;
 
   const query = `INSERT INTO overviews(id,title,review,reviewStars,numOfReviews,pricePerPersonLow,pricePerPersonHigh,category,topTags,"description") VALUES (?,?,?,?,?,?,?,?,?,?)`;
-  console.log(data);
+
   client.execute(query, data, { prepare: true })
     .then(result => res.status(201).send('restaurant inserted'))
     .catch(err => {
       console.log(err);
-      res.status(404).end();
+      res.status(400).end();
     });
 });
 
@@ -74,6 +75,22 @@ app.delete('/api/restaurant/:restaurantId', (req, res) => {
       console.log(err);
       res.status(404).end();
     });
+});
+
+//route for stress test
+app.post('/stress/restaurant/', (req, res) => {
+  const data = req.body;
+
+  const query = `INSERT INTO overviews(id,title,review,reviewStars,numOfReviews,pricePerPersonLow,pricePerPersonHigh,category,topTags,"description") VALUES (?,?,?,?,?,?,?,?,?,?)`;
+  // console.log(data);
+
+  client.execute(query, data, { prepare: true })
+    .then(result => res.status(201).send('restaurant inserted'))
+    .catch(err => {
+      console.log(err);
+      res.status(400).end();
+    })
+    .then(() => client.execute(`DELETE FROM overviews WHERE id=${data.id}`));
 });
 
 module.exports = app;

@@ -26,3 +26,6 @@ dist/
 
 # generated CSV files
 *.csv
+
+# newrelic credentials
+newrelic.js
