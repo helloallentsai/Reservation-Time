@@ -16,7 +16,7 @@ const Review = (props) => (
       <StarEntry starEntry={reviewStar} key={idx} />
     ))}
     </div>
-    <div style={textStyle}>{parseFloat(props.review._data.review).toFixed(2)}</div>
+    <div style={textStyle}>{parseFloat(props.review._data.review).toFixed(1)}</div>
   </div>
 );
 
