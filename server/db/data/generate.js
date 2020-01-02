@@ -3,13 +3,15 @@ const faker = require('faker');
 const categories = require('../categories.json');
 
 
-const generateData = (path) => {
+const generateData = (path, start) => {
 
   const ws = fs.createWriteStream(path);
   ws.write(`id,title,review,reviewStars,numOfReviews,pricePerPersonLow,pricePerPersonHigh,category,topTags,"description"\n`);
 
-  let i = 10000000;
-  const start = new Date();
+  let i = 10000000 - start + 1;
+  let target = i - 2000000;
+
+  const now = new Date();
 
   const generate = () => {
     let ok = true;
@@ -37,22 +39,26 @@ const generateData = (path) => {
       const entry = `${id};${title};${review};[${reviewStars}];${numOfReviews};${pricePerPersonLow};${pricePerPersonHigh};${category};[${tags}];${description}\n`;
       i--;
 
-      if (i === 0) {
+      if (i === target) {
         ws.write(entry);
-        console.log(`About ${(new Date() - start) / 1000} seconds to generate`);
+        console.log(`About ${(new Date() - now) / 1000} seconds to generate`);
       } else {
         ok = ws.write(entry);
       }
-    } while (i > 0 && ok);
+    } while (i > target && ok);
 
-    if (i > 0) {
+    if (i > target) {
       ws.once('drain', generate);
     }
   };
   generate();
 };
 
-generateData('./csv/overview.csv');
+generateData('./csv/overview1.csv', 1);
+generateData('./csv/overview2.csv', 2000001);
+// generateData('./csv/overview3.csv', 4000001);
+// generateData('./csv/overview4.csv', 6000001);
+// generateData('./csv/overview5.csv', 8000001);
 
 
 
