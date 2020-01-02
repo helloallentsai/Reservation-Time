@@ -56,9 +56,9 @@ const generateData = (path, start) => {
 
 generateData('./csv/overview1.csv', 1);
 generateData('./csv/overview2.csv', 2000001);
-// generateData('./csv/overview3.csv', 4000001);
-// generateData('./csv/overview4.csv', 6000001);
-// generateData('./csv/overview5.csv', 8000001);
+generateData('./csv/overview3.csv', 4000001);
+generateData('./csv/overview4.csv', 6000001);
+generateData('./csv/overview5.csv', 8000001);
 
 
 
