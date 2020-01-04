@@ -11,7 +11,8 @@
     "start": "nodemon server/index.js",
     "db:setup": "node server/db/seed.js",
     "build": "webpack -d --watch",
-    "test": "jest --runInBand --coverage"
+    "test": "jest --runInBand --coverage",
+    "lb": "nodemon server/lb.js"
   },
   "dependencies": {
     "@babel/core": "^7.7.4",
@@ -24,10 +25,14 @@
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
     "express": "^4.17.1",
     "faker": "^4.1.0",
+    "http-proxy-middleware": "^0.20.0",
     "jest": "^24.9.0",
     "jquery": "^3.4.1",
+    "load-balancers": "^1.3.3",
     "mongoose": "^5.7.12",
+    "morgan": "^1.9.1",
     "newrelic": "^6.2.0",
+    "nodemon": "^2.0.2",
     "pg": "^7.15.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",

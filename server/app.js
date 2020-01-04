@@ -2,6 +2,7 @@ require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const morgan = require('morgan');
 
 //mongo
 // const db = require('./db/overviewDAO.js');
@@ -14,6 +15,7 @@ const client = require('./db/cassandra/index.js');
 
 const app = express();
 
+app.use(morgan('dev'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -78,8 +80,9 @@ app.delete('/api/restaurant/:restaurantId', (req, res) => {
 });
 
 //route for stress test
-app.post('/stress/restaurant/', (req, res) => {
+app.post('/stress/restaurant/:restaurantId', (req, res) => {
   const data = req.body;
+  data.id = req.params.restaurantId;
 
   const query = `INSERT INTO overviews(id,title,review,reviewStars,numOfReviews,pricePerPersonLow,pricePerPersonHigh,category,topTags,"description") VALUES (?,?,?,?,?,?,?,?,?,?)`;
   // console.log(data);
