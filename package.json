@@ -12,7 +12,6 @@
     "db:setup": "node server/db/seed.js",
     "build": "webpack -d --watch",
     "test": "jest --runInBand --coverage",
-    "lb": "nodemon server/lb.js"
   },
   "dependencies": {
     "@babel/core": "^7.7.4",
