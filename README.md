@@ -2,6 +2,10 @@
 An app for reservation page displaying overview, map, and availability dates/times. Horizontally scaled EC2 servers and load balanced with NGINX to improve query times by 40x. Designed data generation script to insert 10m entries into database while reducing memory usage by 50%. Generated application load testing with NewRelic and Loader.io to maintain 0% error rate at 1k rps.
 
 ## Photos
+Example of overview module for one entry
+
+![example](../assets/example.jpg?raw=true)
+
 New Relic dashboard
 
 ![newrelic](../assets/newrelic.png?raw=true)
